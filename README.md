@@ -1,5 +1,7 @@
 # UsersManagerTemplate
 
+- passkeys and blazor
+
 TODO lsit:
 1. download and prepare ide and create extended todo list
 2. create simple crud for user management function, web api project
