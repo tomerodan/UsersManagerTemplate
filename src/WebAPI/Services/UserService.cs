@@ -7,14 +7,11 @@ namespace WebAPI.Services;
 public class UserService : IUserService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly IUserService _userService;
 
     public UserService(
-        ApplicationDbContext dbContext,
-        IUserService userService)
+        ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-        _userService = userService;
     }
 
     public async Task<IEnumerable<UserDto>> GetUsers()

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebAPI;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(
     x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
 
+builder.Services.AddScoped<IUserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,5 +24,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("api/users", async (IUserService userService) => Results.Ok(await userService.GetUsers()));
+
+app.MapGet("api/users/{id:Guid}", async (Guid id, IUserService userService) =>
+{
+    var result = await userService.GetUser(id);
+    return result is null ? Results.NotFound() : Results.Ok(result);
+});
 
 app.Run();
