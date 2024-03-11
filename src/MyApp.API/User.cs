@@ -1,4 +1,4 @@
-namespace WebAPI;
+namespace MyApp.API;
 
 public class User
 {

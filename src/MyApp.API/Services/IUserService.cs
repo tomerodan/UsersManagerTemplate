@@ -1,7 +1,7 @@
-using WebAPI.DTO;
-using WebAPI.Requests;
+using MyApp.API.DTO;
+using MyApp.API.Requests;
 
-namespace WebAPI.Services;
+namespace MyApp.API.Services;
 
 public interface IUserService
 {

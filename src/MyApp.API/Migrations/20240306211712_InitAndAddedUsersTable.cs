@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebAPI.Migrations
+namespace MyApp.API.Migrations
 {
     /// <inheritdoc />
     public partial class InitAndAddedUsersTable : Migration
