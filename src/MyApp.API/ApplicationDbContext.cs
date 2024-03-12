@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyApp.Domain.Entities;
 
 namespace MyApp.API;
 

@@ -1,4 +1,4 @@
-namespace MyApp.API;
+namespace MyApp.Domain.Entities;
 
 public class User
 {

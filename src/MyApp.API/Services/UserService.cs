@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyApp.API.DTO;
 using MyApp.API.Requests;
+using MyApp.Domain.Entities;
 
 namespace MyApp.API.Services;
 
