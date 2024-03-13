@@ -1,4 +1,4 @@
-namespace MyApp.API.DTO;
+namespace MyApp.Application.DTO;
 
 public class UserDto
 {

@@ -1,4 +1,4 @@
-namespace MyApp.API.Requests;
+namespace MyApp.Application.Requests;
 
 public class AddUser
 {

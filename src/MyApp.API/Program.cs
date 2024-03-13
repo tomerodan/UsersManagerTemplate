@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using MyApp.API;
-using MyApp.API.Services;
+using MyApp.Application.Services;
+using MyApp.Infrastructure.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
+// builder.Services.AddDbContext<ApplicationDbContext>(
+//     x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
+builder.Services.AddPostgresDatabase();
 
 builder.Services.AddScoped<IUserService, UserService>();
 
