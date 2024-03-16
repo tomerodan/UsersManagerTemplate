@@ -3,7 +3,7 @@ using MyApp.Domain.Entities;
 
 namespace MyApp.Infrastructure.DAL;
 
-public class ApplicationDbContext : DbContext
+internal sealed class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
 

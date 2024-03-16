@@ -1,42 +1,49 @@
+using MyApp.Application.Abstractions;
 using MyApp.Application.DTO;
 using MyApp.Application.Requests;
+using MyApp.Domain.Entities;
 
 namespace MyApp.Application.Services;
 
 public class UserService : IUserService
 {
-    //private readonly ApplicationDbContext _dbContext;
+    private readonly IUserRepository _userRepository;
 
-    public UserService()
+    public UserService(IUserRepository userRepository)
     {
-
+        _userRepository = userRepository;
     }
 
-    // public async Task<IEnumerable<UserDto>> GetUsers()
-    // {
-    //     var users = await _dbContext.Users.Select(x => new UserDto
-    //     {
-    //         Id = x.Id,
-    //         Username = x.Username,
-    //         FirstName = x.FirstName,
-    //         LastName = x.LastName
-    //     }).ToListAsync();
-    //     return users;
-    // }
+    public async Task<IEnumerable<UserDto>> GetUsers()
+    {
+        var users = await _userRepository.GetAll();
 
-    // public async Task<UserDto> GetUser(Guid id)
-    // {
-    //     var user = await _dbContext.Users.Where(x => x.Id == id).Select(x => new UserDto
-    //     {
-    //         Id = x.Id,
-    //         Username = x.Username,
-    //         FirstName = x.FirstName,
-    //         LastName = x.LastName
-    //     }).FirstOrDefaultAsync();
-    //     return user;
-    // }
+        var usersDto = users.Select(x => new UserDto
+        {
+            Id = x.Id,
+            Username = x.Username,
+            FirstName = x.FirstName,
+            LastName = x.LastName
+        });
+        
+        return usersDto;
+    }
 
-    /*public async Task<UserDto> AddUser(AddUser addUserRequest)
+    public async Task<UserDto> GetUser(Guid id)
+    {
+        var user = await _userRepository.GetById(id);
+        var userDto = new UserDto
+        {
+            Id = user.Id,
+            Username = user.Username,
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        };
+        
+        return userDto;
+    }
+
+    public async Task<UserDto> AddUser(AddUser addUserRequest)
     {
         var newUser = new User()
         {
@@ -46,8 +53,7 @@ public class UserService : IUserService
             LastName = addUserRequest.LastName
         };
 
-        await _dbContext.Users.AddAsync(newUser);
-        await _dbContext.SaveChangesAsync();
+        await _userRepository.Add(newUser);
 
         var userDto = new UserDto
         {
@@ -58,20 +64,5 @@ public class UserService : IUserService
         };
         
         return userDto;
-    }*/
-    
-    public Task<IEnumerable<UserDto>> GetUsers()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UserDto> GetUser(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UserDto> AddUser(AddUser addUserRequest)
-    {
-        throw new NotImplementedException();
     }
 }
