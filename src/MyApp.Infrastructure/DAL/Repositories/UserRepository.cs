@@ -13,5 +13,8 @@ internal class UserRepository(ApplicationDbContext dbContext) : IUserRepository
         => dbContext.Users.SingleOrDefaultAsync(x => x.Id == id);
 
     public async Task Add(User user)
-        => await dbContext.AddAsync(user);
+    {
+        await dbContext.AddAsync(user);
+        await dbContext.SaveChangesAsync();
+    }
 }
