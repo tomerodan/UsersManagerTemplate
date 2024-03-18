@@ -1,4 +1,4 @@
-using MyApp.Application.Requests;
+using MyApp.API.Endpoints;
 using MyApp.Application.Services;
 using MyApp.Infrastructure.DAL;
 
@@ -26,18 +26,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("api/users", async (IUserService userService) => Results.Ok(await userService.GetUsers()));
-
-app.MapGet("api/users/{id:Guid}", async (Guid id, IUserService userService) =>
-{
-    var result = await userService.GetUser(id);
-    return result is null ? Results.NotFound() : Results.Ok(result);
-}).WithName("GetUserByIdEndpoint");
-
-app.MapPost("api/users", async (AddUser request, IUserService userService) =>
-{
-    var userDto = await userService.AddUser(request);
-    return Results.CreatedAtRoute("GetUserByIdEndpoint", new {userDto.Id});
-});
+app.UseUsersEndpoints();
 
 app.Run();
