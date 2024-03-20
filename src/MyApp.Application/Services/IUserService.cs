@@ -8,5 +8,5 @@ public interface IUserService
     Task<IEnumerable<UserDto>> GetUsers();
     Task<UserDto> GetUser(Guid id);
     Task<UserDto> AddUser(AddUser addUserRequest);
-
+    Task<Guid> SignUp(SignUp signUpRequest);
 }

@@ -22,6 +22,12 @@ internal static class UsersEndpoints
             var userDto = await userService.AddUser(request);
             return Results.CreatedAtRoute(GetByIdEndpointName, new {userDto.Id});
         });
+        
+        app.MapPost("api/signUp", async (SignUp request, IUserService userService) =>
+        {
+            var userId = await userService.SignUp(request);
+            return Results.CreatedAtRoute(GetByIdEndpointName, new {id = userId});
+        });
 
         return app;
     }

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using MyApp.API.Endpoints;
 using MyApp.Application.Services;
+using MyApp.Domain.Entities;
 using MyApp.Infrastructure.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPostgresDatabase();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
 

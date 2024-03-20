@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using MyApp.Application.Abstractions;
 using MyApp.Application.DTO;
 using MyApp.Application.Requests;
@@ -8,10 +9,12 @@ namespace MyApp.Application.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPasswordHasher<User> _passwordHasher;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
     {
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<IEnumerable<UserDto>> GetUsers()
@@ -64,5 +67,30 @@ public class UserService : IUserService
         };
         
         return userDto;
+    }
+    
+    public async Task<Guid> SignUp(SignUp signUpRequest)
+    {
+        var newUser = new User()
+        {
+            Id = Guid.NewGuid(),
+            Email = signUpRequest.Email,
+            Username = signUpRequest.Username,
+            PasswordHash = _passwordHasher.HashPassword(default, signUpRequest.Password),
+            FirstName = signUpRequest.FirstName,
+            LastName = signUpRequest.LastName
+        };
+
+        await _userRepository.Add(newUser);
+
+        var userDto = new UserDto
+        {
+            Id = newUser.Id,
+            Username = newUser.Username,
+            FirstName = newUser.FirstName,
+            LastName = newUser.LastName
+        };
+        
+        return userDto.Id;
     }
 }
