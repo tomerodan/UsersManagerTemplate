@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using MyApp.API.Endpoints;
 using MyApp.Application.Services;
 using MyApp.Domain.Entities;
+using MyApp.Infrastructure;
 using MyApp.Infrastructure.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddDbContext<ApplicationDbContext>(
 //     x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
 builder.Services.AddPostgresDatabase();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -28,7 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseUsersEndpoints();
 
 app.Run();
