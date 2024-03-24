@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddDbContext<ApplicationDbContext>(
 //     x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
 builder.Services.AddPostgresDatabase();
+builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddScoped<IUserService, UserService>();
