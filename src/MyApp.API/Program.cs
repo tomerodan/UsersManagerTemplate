@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using MyApp.API.Endpoints;
+using MyApp.Application.Abstractions;
 using MyApp.Application.Services;
 using MyApp.Domain.Entities;
 using MyApp.Infrastructure;
@@ -33,5 +34,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseUsersEndpoints();
+
+app.MapGet("getJwt", (IAuthenticator authenticator) =>
+{
+    var testId = Guid.NewGuid();
+    var token = authenticator.CreateToken(testId);
+    return Results.Ok(token);
+});
 
 app.Run();

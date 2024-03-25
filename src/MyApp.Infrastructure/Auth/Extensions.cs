@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using MyApp.Application.Abstractions;
 
 namespace MyApp.Infrastructure.Auth;
 
@@ -16,6 +17,7 @@ internal static class Extensions
         var authOptions = configuration.GetOptions<AuthOptions>(SectionName);
 
         services
+            .AddSingleton<IAuthenticator, Authenticator>()
             .AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
