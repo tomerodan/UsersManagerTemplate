@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A42D5A8-DC9C-4B1B-968F-54F0FD1733E6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		_myApp.http = _myApp.http
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp.API", "src\MyApp.API\MyApp.API.csproj", "{BE8C1E26-E2BC-4077-9B22-5EDB0232A626}"
 EndProject
