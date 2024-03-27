@@ -13,9 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// builder.Services.AddDbContext<ApplicationDbContext>(
-//     x => x.UseNpgsql(builder.Configuration.GetConnectionString("MyDatabase")));
-builder.Services.AddPostgresDatabase();
+builder.Services.AddPostgresDatabase(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
 

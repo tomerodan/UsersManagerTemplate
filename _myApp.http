@@ -22,4 +22,4 @@ Content-Type: application/json
 GET {{host}}/api/users
 
 ###
-GET {{host}}/api/users/aac85f4d-34ac-4712-a783-52424c96ef3a
+GET {{host}}/api/users/c2782a57-513e-4f72-ba6c-8345b86f3ef7
