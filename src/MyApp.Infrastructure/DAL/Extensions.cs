@@ -6,7 +6,7 @@ using MyApp.Infrastructure.DAL.Repositories;
 
 namespace MyApp.Infrastructure.DAL;
 
-public static class Extensions
+internal static class Extensions
 {
     public static IServiceCollection AddPostgresDatabase(this IServiceCollection services, IConfiguration configuration)
     {

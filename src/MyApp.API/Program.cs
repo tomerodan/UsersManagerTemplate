@@ -4,7 +4,6 @@ using MyApp.Application.Abstractions;
 using MyApp.Application.Services;
 using MyApp.Domain.Entities;
 using MyApp.Infrastructure;
-using MyApp.Infrastructure.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddPostgresDatabase(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
 
