@@ -10,7 +10,7 @@ internal static class UsersEndpoints
     public static WebApplication UseUsersEndpoints(this WebApplication app)
     {
         app.MapGet("api/users", async (IUserService userService)
-            => Results.Ok(await userService.GetUsers())).RequireAuthorization();
+            => Results.Ok(await userService.GetUsers()));
 
         app.MapGet("api/users/{id:Guid}", async (Guid id, IUserService userService) =>
         {
