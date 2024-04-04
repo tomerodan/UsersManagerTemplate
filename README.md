@@ -1,2 +1,2 @@
 # UsersManagerTemplate
-ogarnianie blazora
+ogarnianie blazora - in progress
